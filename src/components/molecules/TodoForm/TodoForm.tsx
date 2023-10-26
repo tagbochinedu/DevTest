@@ -3,7 +3,7 @@ import H1 from "../../atoms/H1";
 import CustomInput from "../../atoms/CustomInput/CustomInput";
 import CustomDropdown from "../../atoms/CustomDropdown/CustomDropdown";
 
-interface Todo {
+export interface Todo {
   title: string;
   createdAt: string;
   createdOn: string;
@@ -24,10 +24,36 @@ const TodoForm = () => {
     setFormFields({ ...formFields, [e.target.name]: e.target.value });
   };
 
+  const dropdownSelect = (category: string) => {
+    setFormFields({ ...formFields, category });
+  };
+
   const submitHandler = (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log(formFields);
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "June",
+      "Jul",
+      "Aug",
+      "Sept",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const d = new Date();
+    const date = d.toISOString().slice(0, 10).split("-");
+    date[1] = months.filter((_, index) => index === Number(date[1]) - 1)[0];
+    setFormFields({
+      ...formFields,
+      createdAt: d.toISOString().slice(11, 16),
+      createdOn: date.join(" "),
+    });
   };
+
   return (
     <div className="max-w-[50%] mx-auto bg-lilac p-10 rounded-md font-mono">
       <H1
@@ -44,7 +70,14 @@ const TodoForm = () => {
             formHandler(e);
           }}
         />
-        <CustomDropdown/>
+        <CustomDropdown select={dropdownSelect} />
+        <button
+          className="text-lg py-2 w-full rounded-lg bg-purple-700 hover:bg-purple-500 active:bg-purple-600 text-white mt-3.5 border-darkgray disabled:bg-gray-300 transition-all duration-150 ease-linear"
+          type="submit"
+          disabled={formFields.category === "" || formFields.title === ""}
+        >
+          Submit
+        </button>
       </form>
     </div>
   );
