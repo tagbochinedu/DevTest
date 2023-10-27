@@ -8,35 +8,43 @@ interface Children {
 interface UserData {
   todos: null | any;
   updateStorage: (prop: Todo) => void;
+  completionStatusHandler: (prop: Todo) => void;
 }
 
-const UserContext = React.createContext<UserData>({
+const TodoContext = React.createContext<UserData>({
   todos: null,
   updateStorage: (prop: Todo) => {},
+  completionStatusHandler: (prop: Todo) => {},
 });
 
-export function useUserAuth() {
-  return useContext(UserContext);
+export function useTodoAuth() {
+  return useContext(TodoContext);
 }
 
-export const UserProvider = ({ children }: Children) => {
+export const TodoProvider = ({ children }: Children) => {
   const [todos, setTodos] = useState<Todo[]>(
-    localStorage.get("todos") ? JSON.parse(localStorage.get("todos")) : []
+    JSON.parse(localStorage.getItem("todos") || "[]")
   );
-
   const updateStorage = (prop: Todo) => {
-    let tasks = localStorage.get("todos")
-      ? JSON.parse(localStorage.get("todos"))
-      : [];
+    let tasks = JSON.parse(localStorage.getItem("todos") || "[]");
 
-    tasks.push(prop);
+    tasks.unshift(prop);
     setTodos(tasks);
-    localStorage.set("todos", JSON.stringify(tasks));
+    localStorage.setItem("todos", JSON.stringify(tasks));
+  };
+  
+  const completionStatusHandler = (prop: Todo) => {
+    let tasks = JSON.parse(localStorage.getItem("todos") || "[]");
+    const index = tasks.findIndex((task: Todo) => task.title === prop.title);
+    tasks[index] = prop;
+    setTodos(tasks);
+    localStorage.setItem("todos", JSON.stringify(tasks));
   };
 
   const value = {
     todos,
     updateStorage,
+    completionStatusHandler
   };
-  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+  return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
 };
