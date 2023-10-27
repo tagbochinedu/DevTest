@@ -14,9 +14,9 @@ interface UserData {
 
 const TodoContext = React.createContext<UserData>({
   todos: [],
-  createTaskHandler: (prop: Todo) => {},
-  completionStatusHandler: (prop: Todo) => {},
-  deleteTaskHandler: (index: number) => {},
+  createTaskHandler: () => {},
+  completionStatusHandler: () => {},
+  deleteTaskHandler: () => {},
 });
 
 export function useTodoAuth() {
