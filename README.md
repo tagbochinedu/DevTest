@@ -1,28 +1,26 @@
-# React + TypeScript + Vite
+# Front End Developer Test To-do List Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## A Fully Responsive To-do Application built with Reactjs and Typescript which can create tasks, edit task completion status and delete tasks
 
-Currently, two official plugins are available:
+This project is a test built to be fully responsive, with a simple yet aesthetically pleasing UI. Of the instructions given, the following functionality were to be implemented
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* Functionality for creating todo list items
+* Functionality for searching for todo list items
+* Functionality for persisting todolist using local storage
+* Mobile responsiveness
+* Functionality for copying todo item titles to clipboard
+* Implementing category feature for todo list items
 
-## Expanding the ESLint configuration
+Additionally the following functionalities were also implemented
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+* Functionality for changing task completion state
+* Functionality for deleting tasks 
 
-- Configure the top-level `parserOptions` property like this:
+## How to install this project locally
+To run this project locally, you will need both an IDE nd nodejs installed this is because it is a Reactjs project. If you have met this condition, then follow the steps below
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-# DevTest
+1. Clone this project
+2. Open the folder in your IDE
+3. Open your terminal and change directory to the project folder if it is not already there
+4. run 'npm install' to install node_modules
+5. run npm run dev

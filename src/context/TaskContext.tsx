@@ -50,7 +50,7 @@ export const TodoProvider = ({ children }: Children) => {
 
   const deleteTaskHandler = (prop: number) => {
     let tasks = JSON.parse(localStorage.getItem("todos") || "[]");
-    const index = tasks.filter((todo: Todo, index: number) => index !== prop);
+    const index = tasks.filter((_: Todo, index: number) => index !== prop);
      setTodos(index);
      localStorage.setItem("todos", JSON.stringify(index));
   };
