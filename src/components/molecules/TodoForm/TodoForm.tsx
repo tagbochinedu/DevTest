@@ -70,7 +70,7 @@ const TodoForm = () => {
 
   return (
     <Card styling="bg-lilac">
-      <H1 styling="text-white uppercase " text="Create a new Task Here" />
+      <H1 styling="text-white uppercase text-center" text="Create a new Task Here" />
       <form onSubmit={submitHandler}>
         <CustomInput
           label="Title"

@@ -30,7 +30,7 @@ const TodoList = () => {
 
   return (
     <Card styling="bg-dark mt-10">
-      <H1 styling="uppercase text-white" text="View Your Tasks Here" />
+      <H1 styling="uppercase text-white text-center" text="View Your Tasks Here" />
       <div className="mt-4 px-1.5 md:px-4 py-2 rounded-lg min-h-[80px] relative">
         {todos.length === 0 ? (
           <p className="text-white text-center text-xs absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%]">
