@@ -3,7 +3,6 @@ import H1 from "../../atoms/H1";
 import Card from "../../atoms/Card/Card";
 import { useTodoAuth } from "../../../context/TaskContext";
 import CustomInput from "../../atoms/CustomInput/CustomInput";
-import { Todo } from "../TodoForm/TodoForm";
 
 const TodoList = () => {
   const { todos, completionStatusHandler, deleteTaskHandler } = useTodoAuth();
