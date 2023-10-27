@@ -6,15 +6,17 @@ interface Children {
 }
 
 interface UserData {
-  todos: null | any;
-  updateStorage: (prop: Todo) => void;
+  todos: Todo[]
+  createTaskHandler: (prop: Todo) => void;
   completionStatusHandler: (prop: Todo) => void;
+  deleteTaskHandler: (index: number) => void;
 }
 
 const TodoContext = React.createContext<UserData>({
-  todos: null,
-  updateStorage: (prop: Todo) => {},
+  todos: [],
+  createTaskHandler: (prop: Todo) => {},
   completionStatusHandler: (prop: Todo) => {},
+  deleteTaskHandler: (index: number) => {},
 });
 
 export function useTodoAuth() {
@@ -25,26 +27,40 @@ export const TodoProvider = ({ children }: Children) => {
   const [todos, setTodos] = useState<Todo[]>(
     JSON.parse(localStorage.getItem("todos") || "[]")
   );
-  const updateStorage = (prop: Todo) => {
+
+  const createTaskHandler = (prop: Todo) => {
     let tasks = JSON.parse(localStorage.getItem("todos") || "[]");
 
     tasks.unshift(prop);
     setTodos(tasks);
     localStorage.setItem("todos", JSON.stringify(tasks));
   };
-  
+
   const completionStatusHandler = (prop: Todo) => {
     let tasks = JSON.parse(localStorage.getItem("todos") || "[]");
-    const index = tasks.findIndex((task: Todo) => task.title === prop.title);
-    tasks[index] = prop;
-    setTodos(tasks);
-    localStorage.setItem("todos", JSON.stringify(tasks));
+    const index = tasks.filter((task: Todo) => task.title !== prop.title);
+    if (prop.completed) {
+      index.push(prop);
+    } else {
+      index.unshift(prop);
+    }
+    setTodos(index);
+    localStorage.setItem("todos", JSON.stringify(index));
+  };
+
+  const deleteTaskHandler = (prop: number) => {
+    let tasks = JSON.parse(localStorage.getItem("todos") || "[]");
+    const index = tasks.filter((todo: Todo, index: number) => index !== prop);
+     setTodos(index);
+     localStorage.setItem("todos", JSON.stringify(index));
   };
 
   const value = {
     todos,
-    updateStorage,
-    completionStatusHandler
+    createTaskHandler,
+    completionStatusHandler,
+    deleteTaskHandler,
+ 
   };
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
 };

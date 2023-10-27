@@ -4,7 +4,7 @@ import TodoList from "./components/molecules/TodoList.tsx/TodoList";
 
 export default function App() {
   return (
-    <main className="bg-darkgray min-h-screen">
+    <main className="bg-darkgray min-h-screen pb-10">
       <Header />
       <TodoForm/>
       <TodoList/>

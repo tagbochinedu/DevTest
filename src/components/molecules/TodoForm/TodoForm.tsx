@@ -17,7 +17,7 @@ const TodoForm = () => {
     category: "Select a Category",
     completed: false,
   });
-  const { updateStorage } = useTodoAuth();
+  const { createTaskHandler, todos } = useTodoAuth();
 
   const formHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setFormFields({ ...formFields, [e.target.name]: e.target.value });
@@ -52,22 +52,25 @@ const TodoForm = () => {
       createdOn: date.join(" "),
     };
 
-    updateStorage(todo);
-    alert('task has been created')
-    setFormFields({
-      title: "",
-      category: "Select a Category",
-      completed: false,
-    });
+    const exists = todos.find((task: Todo) => task.title === todo.title);
+
+    if (!exists) {
+      createTaskHandler(todo);
+      alert("task has been created");
+      setFormFields({
+        title: "",
+        category: "Select a Category",
+        completed: false,
+      });
+    } else {
+      alert("this task already esists");
+      setFormFields({ ...formFields, title: "" });
+    }
   };
 
   return (
-
     <Card styling="bg-lilac">
-      <H1
-        styling="text-white uppercase "
-        text="Create a new Task Here"
-      />
+      <H1 styling="text-white uppercase " text="Create a new Task Here" />
       <form onSubmit={submitHandler}>
         <CustomInput
           label="Title"
@@ -79,11 +82,17 @@ const TodoForm = () => {
             formHandler(e);
           }}
         />
-        <CustomDropdown select={dropdownSelect} category={formFields.category}/>
+        <CustomDropdown
+          select={dropdownSelect}
+          category={formFields.category}
+        />
         <button
           className="text-base md:text-lg py-1 md:py-2 w-full rounded-lg bg-purple-700 hover:bg-purple-500 active:bg-purple-600 text-white mt-3.5 border-darkgray disabled:bg-gray-300 transition-all duration-150 ease-linear"
           type="submit"
-          disabled={formFields.category === "Select a Category" || formFields.title === ""}
+          disabled={
+            formFields.category === "Select a Category" ||
+            formFields.title === ""
+          }
         >
           Submit
         </button>
