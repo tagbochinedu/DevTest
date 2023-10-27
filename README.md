@@ -5,7 +5,7 @@
 This project is a test built to be fully responsive, with a simple yet aesthetically pleasing UI. Of the instructions given, the following functionality were to be implemented
 
 * Functionality for creating todo list items
-* Functionality for searching for todo list items
+* Functionality for searching for todo list items both by category andn title
 * Functionality for persisting todolist using local storage
 * Mobile responsiveness
 * Functionality for copying todo item titles to clipboard
@@ -23,4 +23,4 @@ To run this project locally, you will need both an IDE nd nodejs installed this 
 2. Open the folder in your IDE
 3. Open your terminal and change directory to the project folder if it is not already there
 4. run 'npm install' to install node_modules
-5. run npm run dev
+5. run 'npm run dev' to run the app locally in your browser on localhost:5173
